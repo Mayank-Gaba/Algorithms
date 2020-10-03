@@ -1,0 +1,87 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+struct tree
+{
+	int data;
+	tree *left,*right;
+}*root,*temp;
+void mirror(tree*node)
+{
+	if(node==NULL)
+		return;
+	temp=node->left;
+	node->left=node->right;
+	node->right=temp;
+	mirror(node->left);
+	mirror(node->right);
+}
+void insert(tree *node,int val)
+{
+	//queue stores the nodes which has both the childs
+	//level order traversal using queue
+	queue<struct tree*>qq;
+	qq.push(node);
+	//cout<<"insert is called\n";
+   if(root==NULL)
+   {
+   	 temp=new tree();
+   	 temp->data=val;
+   	 temp->right=temp->left=NULL;
+   	 qq.pop();
+   	 root=temp;
+   	 //cout<<"putting root\n";
+   }
+   while(!qq.empty())
+   {
+   	node=qq.front();
+      qq.pop();
+   //	cout<<"in while\n";
+   	if(node->left==NULL)
+   	{
+   		 temp=new tree();
+   	 temp->data=val;
+   	 temp->right=NULL;
+   	 temp->left=NULL;
+   	 node->left=temp;
+   	 break;
+   	}
+   	else
+   		qq.push(node->left);
+   	if(node->right==NULL)
+   	{
+   		 temp=new tree();
+   	 temp->data=val;
+   	 temp->right=NULL;
+   	 temp->left=NULL;
+   	 node->right=temp;
+   	 break;
+   	}
+   	else
+   		qq.push(node->right);
+   }
+}
+void inorder(tree *t)
+{ //cout<<"in qqq";
+	if(t!=NULL)
+	{
+		inorder(t->left);
+		cout<<t->data<<" ";
+		inorder(t->right);
+	}
+}
+int main()
+{
+	int i,j,n;
+	cin>>n;
+	root=NULL;
+	for(i=0;i<n;i++)
+	{
+		cin>>j;
+		insert(root,j);
+	}
+	inorder(root);
+	mirror(root);
+	inorder(root);
+return 0;
+}
