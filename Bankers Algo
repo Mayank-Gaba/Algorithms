@@ -1,0 +1,58 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+	int p,r,i,j,k=0,t,c=0;
+	cin>>p>>r;
+int alloc[p][r],maxneed[p][r],rem_ned[p][r],avail[r],fin[p];
+for(i=0;i<p;i++)
+{
+	for(j=0;j<r;j++)
+		cin>>alloc[i][j];
+}
+for(i=0;i<p;i++)
+{
+	for(j=0;j<r;j++)
+		cin>>maxneed[i][j];
+}
+for(i=0;i<r;i++)
+cin>>avail[i];
+for(i=0;i<p;i++)
+{
+	for(j=0;j<r;j++)
+		rem_ned[i][j]=maxneed[i][j]-alloc[i][j];
+}
+memset(fin,0,sizeof(fin));
+while(k!=p)
+{
+for(i=0;i<p;i++)
+{
+	if(fin[i]==0)
+	{
+	for(j=0;j<r;j++)
+	{
+		if(avail[j]>=rem_ned[i][j])
+		{
+			c++;
+		}
+		
+		else
+			break;
+	}
+	if(c==r)
+		{
+			k++;
+            fin[i]=k;
+            for(t=0;t<r;t++)
+            {
+            	avail[t]=avail[t]+alloc[i][t];
+            }
+		}
+		c=0;
+
+}}}
+for(i=0;i<p;i++)
+cout<<fin[i]<<"\n";
+return 0;
+}
