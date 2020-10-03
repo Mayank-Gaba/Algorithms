@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+# define ll long long
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    	float x1,y1,x2,y2,x3,y3;
+    	y3=0;
+    	float a1,a2,a3,a4;
+    	cin>>x1>>y1>>x2>>y2;
+    	if(x1==x2)
+    	{
+    		x3=x1;
+    		a1=sqrt(((x3-x1)*(x3-x1))+(y1*y1))+sqrt(((x3-x2)*(x3-x2))+(y2*y2));
+    		cout<<a1<<"\n";
+    	}
+    	else
+    	{
+    	x3=x1+1;
+    	a1=sqrt(((x3-x1)*(x3-x1))+(y1*y1))+sqrt(((x3-x2)*(x3-x2))+(y2*y2));
+    	x3=x2+1;
+    	a2=sqrt(((x3-x1)*(x3-x1))+(y1*y1))+sqrt(((x3-x2)*(x3-x2))+(y2*y2));
+    	x3=x1-1;
+    	a3=sqrt(((x3-x1)*(x3-x1))+(y1*y1))+sqrt(((x3-x2)*(x3-x2))+(y2*y2));
+    	x3=x2-1;
+    	a4=sqrt(((x3-x1)*(x3-x1))+(y1*y1))+sqrt(((x3-x2)*(x3-x2))+(y2*y2));
+    	if(a1<a2 && a1<a3 &&a1<a4)
+    		cout<<a1<<"\n";
+    	else if(a2<a1 && a2<a3 && a2<a4)
+    		cout<<a2<<"\n";
+    	else if(a3<a1 && a3<a2 && a3<a4)
+    		cout<<a3<<"\n";
+    	else
+    		cout<<a4<<"\n";
+    }
+    }
+}
